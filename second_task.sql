@@ -1,14 +1,7 @@
 CREATE TABLE IF NOT EXISTS Employee (
     id SERIAL PRIMARY KEY,
-    nameEmployee VARCHAR (50) NOT NULL,
-    department VARCHAR(20) NOT NULL
-);
-CREATE TABLE IF NOT EXISTS Chief (
-    id SERIAL PRIMARY KEY,
-    nameChief VARCHAR(80) 
-);
-CREATE TABLE IF NOT EXISTS ChiefEmployee (
-    chiefID INTEGER NOT NULL REFERENCES Chief(id),
-    employeeID INTEGER NOT NULL REFERENCES Employee(id),
-    CONSTRAINT pk PRIMARY KEY (chiefID, employeeID)
+    name VARCHAR (50) NOT NULL,
+    department VARCHAR(20) NOT NULL,
+    ChiefID INTEGER NULL,
+    FOREIGN KEY (chiefID) REFERENCES Employee(id)
 );

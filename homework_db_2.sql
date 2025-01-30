@@ -12,29 +12,29 @@ CREATE TABLE IF NOT EXISTS MusicianGenre (
     GenreID INTEGER REFERENCES Genres(id),
     CONSTRAINT pk PRIMARY KEY (MusitianID, GenreID)
 );
-CREATE TABLE IF NOT EXISTS  Tracks (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(60) NOT NULL,
-    duration DECIMAL 
-);
 CREATE TABLE IF NOT EXISTS  Albums (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(60) NOT NULL,
-    TrackID INTEGER NOT NULL REFERENCES Tracks(id),
-    relise DATE 
+    title VARCHAR(60) NOT NULL,  
+    relisedate INTEGER CHECK(relisedate BETWEEN 1900 AND 2025)
 );
 CREATE TABLE IF NOT EXISTS  MusicianAlbums (
     MusicianID INTEGER REFERENCES Musician(id),
     AlbumID INTEGER REFERENCES Albums(id),
-    CONSTRAINT pk2 PRIMARY KEY (AlbumID, MusicianID)
+    CONSTRAINT pk1 PRIMARY KEY (AlbumID, MusicianID)
+);
+CREATE TABLE IF NOT EXISTS  Tracks (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(60) NOT NULL,
+    duration INTEGER CHECK (duration BETWEEN 10 AND 900),
+    AlbumID INTEGER NOT NULL REFERENCES Albums(id)
 );
 CREATE TABLE IF NOT EXISTS Collectoins (
     id SERIAL PRIMARY KEY,
     title VARCHAR(60) NOT NULL,
-    relise DATE
+    relisedate INTEGER CHECK(relisedate BETWEEN 1900 AND 2025)
 );
 CREATE TABLE IF NOT EXISTS  CollectionsTracks (
     CollectionID INTEGER REFERENCES Collectoins(id),
     TrackID INTEGER REFERENCES Tracks(id),
-    CONSTRAINT pk1 PRIMARY KEY (CollectionID, TrackID)
+    CONSTRAINT pk2 PRIMARY KEY (CollectionID, TrackID)
 );
