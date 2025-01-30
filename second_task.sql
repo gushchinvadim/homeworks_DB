@@ -5,10 +5,10 @@ CREATE TABLE IF NOT EXISTS Employee (
 );
 CREATE TABLE IF NOT EXISTS Chief (
     id SERIAL PRIMARY KEY,
-    nameChief VARCHAR (50) NOT NULL
+    nameChief VARCHAR(80) 
 );
 CREATE TABLE IF NOT EXISTS ChiefEmployee (
     chiefID INTEGER NOT NULL REFERENCES Chief(id),
     employeeID INTEGER NOT NULL REFERENCES Employee(id),
-    PRIMARY KEY (chiefID, employeeID)
+    CONSTRAINT pk PRIMARY KEY (chiefID, employeeID)
 );
